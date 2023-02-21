@@ -47,7 +47,8 @@ module.exports = {
       backgroundColor: {
         mainColor: '#FBF8F9',
         secondaryColor: '#F0F0F0',
-        blackOverlay: 'rgba(0, 0 ,0 ,0.7)',
+        blackOverlay: 'rgba(0, 0, 0, 0.7)',
+        cyan: '#03FCD3',
       },
       keyframes: {
         'slide-in': {
@@ -73,7 +74,7 @@ module.exports = {
         },
       },
       animation: {
-        'slide-in': 'slide-in 0.5s ease-out',
+        'slide-in': 'slide-in 0.3s',
         'slide-fwd': ' slide-fwd 0.45s cubic-bezier(0.250, 0.460, 0.450, 0.940) both',
       },
       transitionProperty: {
