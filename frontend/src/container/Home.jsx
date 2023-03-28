@@ -5,7 +5,7 @@ import {Link, Route, Routes} from 'react-router-dom';
 
 import Feed from './Feed';
 import {Sidebar, Profile} from '../components';
-//import {client} from '../client';
+import {client} from '../client';
 import {userQuery} from '../utils/data';
 
 import BlackLogo from '../visuals/BlackLogo.png';
@@ -13,22 +13,22 @@ import BlackLogo from '../visuals/BlackLogo.png';
 const Home = () => {
   const [toggleSidebar, setToggleSidebar] = useState(false);
   const [user, setUser] = useState(null);
-  //const scrollRef = userRef(null);
+  const scrollRef = useRef(null);
 
   const userInfo = localStorage.getItem('user') !== 'undefined' ? JSON.parse(localStorage.getItem('user')) : localStorage.clear();
   
   // start scroll at top of page
-  // useEffect(() => {
-  //   scrollRef.current.scrollTo(0, 0);
-  // }, [])
+  useEffect(() => {
+    scrollRef.current.scrollTo(0, 0);
+  }, [])
 
   // fetch data of current user
-  // useEffect(() => {
-  //   const query = userQuery(userInfo?.googleID);
-  //   client.fetch(query).then((data) => {
-  //     setUser(data[0]);
-  //   })
-  // }, [])
+  useEffect(() => {
+    const query = userQuery(userInfo?.googleID);
+    client.fetch(query).then((data) => {
+      setUser(data[0]);
+    })
+  }, [])
 
   return (
     <div className="flex bg-gray-50 md:flex-row flex-col h-screen transaction-height duration-75 ease-out">
@@ -54,9 +54,9 @@ const Home = () => {
           </div>
         )}
         </div>
-        <div className="pb-2 flex-1 h-screen overflow-y-scroll" > {/*ref={scrollRef}*/}
+        <div className="pb-2 flex-1 h-screen overflow-y-scroll" ref={scrollRef}>
           <Routes>
-            {/*<Route path="/user/profile/:userId" element={<UserProfile/>}/>*/}
+            <Route path="/user/profile/:userId" element={<Profile/>}/>
             <Route path="/*" element={<Feed user={user && user}/>}/>
           </Routes>
         </div>

@@ -4,7 +4,7 @@ import { FcGoogle, fcGoogle } from 'react-icons/fc';
 import video from '../visuals/Video.mp4';
 import BlackLogo from '../visuals/BlackLogo.png';
 
-import { client } from '../container/client.js';
+import { client } from '../client.js';
 import { GoogleLogin } from '@react-oauth/google';
 const Login = () => {
 

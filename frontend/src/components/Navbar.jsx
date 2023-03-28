@@ -6,7 +6,7 @@ const Navbar = ({user, searchTerm, setSearchTerm}) => {
   const navigate = useNavigate();
 
   // don't show navbar if user doesn't exist
-  //if (!user) return null;
+  if (!user) return null;
 
   return (
     <div className='flex gap-2 md:gap-5 w-full mt-5 pb-7'>
@@ -23,7 +23,7 @@ const Navbar = ({user, searchTerm, setSearchTerm}) => {
       </div>
       <div className='flex gap-3'>
         <Link to={`user-profile/${user?._id}`} className='hidden md:block'>
-          {/*<img src={user.image} alt='user' className='w-14 h-12 rounded-lg'/>*/}
+          <img src={user.image} alt='user' className='w-14 h-12 rounded-lg'/>
         </Link>
         <Link to='make-post' className='bg-cyan text-black rounded-lg w-12 h-12 md:w-14 md:h-12 flex justify-center items-center'>
           <IoMdAdd/>
