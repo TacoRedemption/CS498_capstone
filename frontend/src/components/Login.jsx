@@ -102,10 +102,10 @@ const Login = () => {
         />
 
 
-       
+        {/* ADDING A DARK OVERLAY OVER VIDEO AND INSERTING LOGO  */}
  < div className="absolute flex flex-col justify-center items-center top-0 right-0 left-0 bottom-0 bg blackOverlay">
            <div className="p-5 bg-white rounded-lg">
-            <img src={BlackLogo} width="400px" alt="BlackLogo" />
+           <img src={BlackLogo} width="400px" alt="BlackLogo" />
 
             {/* INSERTING GOOGLE SIGNIN BUTTON  */}
             <div id="signInDiv" className='flex justify-center'></div>
@@ -116,14 +116,6 @@ const Login = () => {
 
 
         
-        {/* ADDING A DARK OVERLAY OVER VIDEO AND INSERTING LOGO 
-        < div className="absolute flex flex-col justify-center top-0 right-0 left-0 bottom-0 bg blackOverlay">
-          {/* <div className="p-5">
-            <img src={BlackLogo} width="400px" alt="BlackLogo" />
-
-            {/* INSERTING GOOGLE SIGNIN BUTTON 
-            <div id="signInDiv"></div>
-          </div> */}
         </div>
         <div className="shadow-2x1">
 
