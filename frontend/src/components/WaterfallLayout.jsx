@@ -14,7 +14,7 @@ const breakptObj = {
 
 const WaterfallLayout = ({posts}) => {
   return (
-    <Masonry className='flex animate-slide-fwd' breakptCols={breakptObj}>
+    <Masonry className='flex animate-slide-fwd' breakpointCols={breakptObj}>
         {posts?.map((post) => <Post key={post._id} post={post} className='w-max'/>)}
     </Masonry>
   )
