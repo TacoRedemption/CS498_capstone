@@ -50,6 +50,9 @@ module.exports = {
         blackOverlay: 'rgba(0, 0, 0, 0.7)',
         cyan: '#03FCD3',
       },
+      opacity: {
+        85: '.85',
+      },
       keyframes: {
         'slide-in': {
           '0%': {
