@@ -6,30 +6,30 @@ import {Link, Route, Routes} from 'react-router-dom';
 import Feed from './Feed';
 import {Sidebar, Profile} from '../components';
 import {client} from '../client';
-import {userQuery} from '../utils/data';
+import {userQueryEmail, fetchGoogleUser, fetchUser} from '../utils/data';
 import BlackLogo from '../visuals/BlackLogo.png';
-import {fetchUser} from '../utils/fetchUser';
 
 const Home = () => {
+  // const [user, setUser] = useState(null);
   const [toggleSidebar, setToggleSidebar] = useState(false);
-  const [user, setUser] = useState(null);
   const scrollRef = useRef(null);
 
-  const userInfo = fetchUser();
-  console.log(userInfo);
+  // get current user from local storage
+  const user = fetchUser();
   
   // start scroll at top of page
   useEffect(() => {
     scrollRef.current.scrollTo(0, 0);
   }, [])
 
-  // fetch data of current user
-  useEffect(() => {
-    const query = userQuery(userInfo?.googleID);
-    client.fetch(query).then((data) => {
-      setUser(data[0]);
-    })
-  }, [])
+  // get sanity user info from google user email in local storage  
+  // const userInfo = fetchGoogleUser();
+  // useEffect(() => {
+  //   const query = userQueryEmail(userInfo?.email);
+  //   client.fetch(query).then((data) => {
+  //     setUser(data[0]);
+  //   })
+  // }, [])
 
   return (
     <div className="flex bg-gray-50 md:flex-row flex-col h-screen transaction-height duration-75 ease-out">
@@ -43,7 +43,7 @@ const Home = () => {
               <img src={BlackLogo} alt="logo" className="h-12"/>
             </Link>
             <Link to={`user-profile/${user?._id}`}>
-              <img src={user?.image} alt="profile picture" className="h-12"/>
+              <img src={user?.image} alt="user profile" className="w-12 h-12 rounded-full object-cover"/>
             </Link>
           </div>
           {toggleSidebar && (

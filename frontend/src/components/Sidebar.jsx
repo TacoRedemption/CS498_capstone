@@ -6,8 +6,8 @@ import {IoIosArrowForward} from 'react-icons/io';
 import BlackLogo from '../visuals/BlackLogo.png';
 
 // styles for current & non-current artform selections
-const isActiveStyle = "flex items-center px-5 gap-3 font-extrabold border-r-2 border-black transition-all duration-200 ease-in-out capitalize";
-const isNotActiveStyle = "flex items-center px-5 gap-3 text-gray-500 hover:text-black transition-all duration-200 ease-in-out capitalize";
+const activeStyle = "flex items-center px-5 gap-3 font-extrabold border-r-2 border-black transition-all duration-200 ease-in-out capitalize";
+const inactiveStyle = "flex items-center px-5 gap-3 text-gray-500 hover:text-black transition-all duration-200 ease-in-out capitalize";
 
 // list of artform categories to browse by
 const artforms = [
@@ -38,7 +38,7 @@ const Sidebar = ({user, closeToggle}) => {
         {/* show links */}
         <div className="flex flex-col gap-5">
           {/* link to home */}
-          <NavLink to="/" className={({isActive}) => isActive ? isActiveStyle : isNotActiveStyle} onClick={handleCloseSidebar}>
+          <NavLink to="/" className={({isActive}) => isActive ? activeStyle : inactiveStyle} onClick={handleCloseSidebar}>
             <RiHomeFill/>
             Home
           </NavLink>
@@ -48,7 +48,7 @@ const Sidebar = ({user, closeToggle}) => {
           </h3>
           {/* show all artform links (exclude other) */}
           {artforms.slice(0, artforms.length - 1).map((artform) => (
-            <NavLink to={`/artform/${artform.name}`} className={({isActive}) => isActive ? isActiveStyle : isNotActiveStyle} onClick={handleCloseSidebar}
+            <NavLink to={`/artform/${artform.name}`} className={({isActive}) => isActive ? activeStyle : inactiveStyle} onClick={handleCloseSidebar}
             key={artform.name}>
               {artform.name}
             </NavLink>
@@ -58,8 +58,9 @@ const Sidebar = ({user, closeToggle}) => {
       {/* if logged in show user profile at bottom */}
       {user && (
         <Link to={`user-profile/${user._id}`} className="flex my-5 mb-3 gap-2 p-2 items-center bg-white rounded-lg shadow-lg mx-3" onClick={handleCloseSidebar}>
-          <img src={user.image} className="w-10 h-10 rounded-full" alt="user profile"/>
+          <img src={user.image} className="w-10 h-10 rounded-full object-cover" alt="user profile"/>
           <p>{user.username}</p>
+          <IoIosArrowForward/>
         </Link>
       )}
     </div>
