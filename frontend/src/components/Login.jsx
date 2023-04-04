@@ -22,12 +22,14 @@ const Login = () => {
     console.log({ name, email, picture })
     //const {name, googleId, ImageUrl} = response.profileObj;
 
+    
     //CREATING A NEW SANITY DOCUMENT OBJ TO STORE THE ABOVE DATA
     const doc = {
       _id:  crypto.randomUUID(),
       _type: 'user',
       username: name,
       image: picture,
+      email: email,
     }
     
     client.fetch(`*[_type == "user" && email == "${email}"]`) //Query the backend for users having the given email
@@ -35,13 +37,7 @@ const Login = () => {
 
         //if theres no user with that email -- we create one
         if (!users.length){
-          return client.create({
-            _id:  crypto.randomUUID(),
-            _type: 'user',
-            username: name,
-            image: picture,
-            email: email,
-          });
+          return client.create(doc);
 
 
           //if there is one user we will return the one user
