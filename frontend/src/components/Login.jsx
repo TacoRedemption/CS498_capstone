@@ -22,7 +22,7 @@ const Login = () => {
     console.log({ name, email, picture })
     //const {name, googleId, ImageUrl} = response.profileObj;
 
-    //CREATING A NEW SANITY DOCUMENT TO STORE THE ABOVE DATA
+    //CREATING A NEW SANITY DOCUMENT OBJ TO STORE THE ABOVE DATA
     const doc = {
       _id:  crypto.randomUUID(),
       _type: 'user',
@@ -42,6 +42,7 @@ const Login = () => {
             image: picture,
             email: email,
           });
+
 
           //if there is one user we will return the one user
         } else if (1 === users.length){

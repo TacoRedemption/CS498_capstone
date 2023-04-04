@@ -5,14 +5,14 @@ import {client} from '../client';
 
 import WaterfallLayout from './WaterfallLayout';
 import Loadbars from './Loadbars';
-import {feedQuery, searchQuery} from '../utils/data';
+import { feedQuery, searchQuery } from '../utils/data';
 
 // waterfall feed component containing posts
 // displayed on feed container
 const PostFeed = () => {
   const [loading, setLoading] = useState(false);
   const [posts, setPosts] = useState(null);
-  const{artformID} = useParams();
+  const { artformID } = useParams();
 
   // get posts - either all or based on artform search
   useEffect(() => {
@@ -31,15 +31,15 @@ const PostFeed = () => {
       })
     }
   }, [artformID])
-  
-  
+
+
   // show loading message when fetching more posts
-  if (loading) return <Loadbars message="Gathering new ideas..."/>
+  if (loading) return <Loadbars message="Gathering new ideas..." />
 
   // show posts in waterfall layout
   return (
     <div>
-      {posts && <WaterfallLayout posts={posts}/>}
+      {posts && <WaterfallLayout posts={posts} />}
     </div>
   )
 }
