@@ -2,7 +2,7 @@ import React from 'react'
 import Masonry from 'react-masonry-css'
 import Post from './Post'
 
-// pixels_in_width: num_columns_displayed
+// screen_pixels_in_width: num_columns_displayed
 const breakptObj = {
     default: 4,
     3000: 6,
@@ -12,6 +12,7 @@ const breakptObj = {
     500: 1,
 }
 
+// form waterfall layout for posts using columns settings in breakptObj
 const WaterfallLayout = ({posts}) => {
   return (
     <Masonry className='flex animate-slide-fwd' breakpointCols={breakptObj}>
