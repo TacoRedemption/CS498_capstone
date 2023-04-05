@@ -1,4 +1,13 @@
-import { client } from "../client";
+// list of artform categories
+export const artforms = [
+    {name: 'Abstract'},
+    {name: 'Modern'},
+    {name: 'Impressionism'},
+    {name: 'Pop'},
+    {name: 'Cubism'},
+    {name: 'Surrealism'},
+    {name: 'Realism'},
+]
 
 // get all info of user of given userID from Sanity
 export const userQuery = (userID) => {

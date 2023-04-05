@@ -3,23 +3,12 @@ import {NavLink, Link} from 'react-router-dom';
 import {RiHomeFill} from 'react-icons/ri';
 import {IoIosArrowForward} from 'react-icons/io';
 
+import {artforms} from '../utils/data';
 import BlackLogo from '../visuals/BlackLogo.png';
 
 // styles for current & non-current artform selections
 const activeStyle = "flex items-center px-5 gap-3 font-extrabold border-r-2 border-black transition-all duration-200 ease-in-out capitalize";
 const inactiveStyle = "flex items-center px-5 gap-3 text-gray-500 hover:text-black transition-all duration-200 ease-in-out capitalize";
-
-// list of artform categories to browse by
-const artforms = [
-  {name: "Abstract"},
-  {name: "Modern"},
-  {name: "Impressionism"},
-  {name: "Pop"},
-  {name: "Cubism"},
-  {name: "Surrealism"},
-  {name: "Realism"},
-  {name: "Other"},
-]
 
 // navigation sidebar
 const Sidebar = ({user, closeToggle}) => {
