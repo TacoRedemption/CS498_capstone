@@ -1,12 +1,12 @@
-import React, {useState} from 'react'
-import {Link, useNavigate} from 'react-router-dom'
-import {v4 as uuid4} from 'uuid'
-import {MdDownloadForOffline} from 'react-icons/md'
-import {AiTwotoneDelete, AITwotoneDelete} from 'react-icons/ai'
-import {BsFillArrowUpRightCircleFill} from 'react-icons/bs'
+import React, {useState} from 'react';
+import {Link, useNavigate} from 'react-router-dom';
+import {v4 as uuid4} from 'uuid';
+import {MdDownloadForOffline} from 'react-icons/md';
+import {AiTwotoneDelete} from 'react-icons/ai';
+import {BsFillArrowUpRightCircleFill} from 'react-icons/bs';
 
-import {client, urlFor} from '../client'
-import {fetchUser} from '../utils/fetchUser'
+import {client, urlFor} from '../client';
+import {fetchGoogleUser, fetchUser} from '../utils/data';
 
 // component for individual post display
 const Post = ({post: {author, image, _id, destination, save}}) => {
@@ -14,9 +14,11 @@ const Post = ({post: {author, image, _id, destination, save}}) => {
   const [toSavePost, setToSavePost] = useState(false);
   const navigate = useNavigate();
 
-  const userInfo = fetchUser();
+  // get current user info from local storage
+  const user = fetchUser();
+  
   // check if user has saved a given post
-  const saved = (save?.filter((item) => item.author._id === userInfo.googleId))?.length;
+  const saved = (save?.filter((item) => item.author._id === user._id))?.length;
   
   // function for a user to save a post
   const savePost = (id) => {
@@ -24,15 +26,15 @@ const Post = ({post: {author, image, _id, destination, save}}) => {
       setToSavePost(true);
 
       client.patch(id).setIfMissing({save: []}).insert('after', 'save[-1]', [{
-        key: uuid4(),
-        userID: userInfo.googleId,
+        _key: uuid4(),
+        uid: user?._id,
         author: {
           _type: 'author',
-          _ref: userInfo.googleId,
+          _ref: user?._id,
         }
       }]).commit().then(() => {
-        window.location.reload();
         setToSavePost(false);
+        window.location.reload();
       })
     }
   }
@@ -57,12 +59,13 @@ const Post = ({post: {author, image, _id, destination, save}}) => {
         {/* show icons if hovering over post */}
         {postHover && (
           <div className='absolute top-0 w-full h-full flex flex-col justify-between p-1 pr-2 pt-2 pb-2 z-50'>
+            {/* top corner icons */}
             <div className='flex items-center justify-between'>
               <div className='flex gap-2'>
                 {/* link for downloading image */}
                 <a href={`${image?.asset?.url}?dl=`} 
                   download 
-                  // onClick={(e) => e.stopPropagation()}
+                  onClick={(e) => e.stopPropagation()}
                   className='bg-white w-9 h-9 rounded flex items-center justify-center text-xl opacity-85 hover:opacity-100 hover:shadow-md'>
                   
                   <MdDownloadForOffline/> {/* download icon */}
@@ -72,33 +75,34 @@ const Post = ({post: {author, image, _id, destination, save}}) => {
               {saved ? (
                 // show if saved & how many have saved
                 <button type='button' className='bg-cyan opacity-85 hover:opacity-100 text-white font-bold px-3 py-1 text-base rounded hover:shadow-md'>
-                  {save?.length} Saved
+                  {save?.length}  Saved
                 </button>
               ) : (
-                // show if not saved
+                // show save button if not saved
                 <button onClick={(e) => {
-                  // e.stopPropagation();
+                  e.stopPropagation();
                   savePost(_id);
                 }}
                   type='button' className='bg-cyan opacity-85 hover:opacity-100 text-white font-bold px-3 py-1 text-base rounded hover:shadow-md'>
-                  {toSavePost ? 'Saving...' : 'Save'}
+                  {save?.length}  {toSavePost ? 'Saving...' : 'Save'}
                 </button>
               )}
             </div>
+            {/* bottom corner icons */}
             <div className='flex justify-between items-center gap-2 w-full'>
                 {/* show image link destination if hosted on another website */}
-                {destination && (
-                  <a href={destination} target='_blank' rel='noreferrer' className='bg-white flex items-center gap-2 text-black font-bold p-2 pl-4 pr-4 rounded-full opacity-70 hover:opacity-100 hover:shadow-md'>
+                {destination ? (
+                  <a href={destination} target='_blank' rel='noreferrer' className='bg-white flex items-center gap-2 text-black font-bold p-1 pl-3 pr-4 rounded-full opacity-85 hover:opacity-100 hover:shadow-md'>
                     <BsFillArrowUpRightCircleFill/>
-                    {destination.slice(8, 30)}
+                    {destination.slice(8, 18)}
                   </a>
-                )}
+                ) : <div/>}  {/* empty div if no link to ensure trash can stays on right side */}
                 {/* show delete button for author to delete own posts */}
-                {author?._id === userInfo.googleId && (
+                {author?.email === user.email && (
                   <button type='button'
-                    className='text-white opacity-85 hover:opacity-100 text-dark font-bold px-3 py-1 text-base rounded hover:shadow-md'
+                    className='bg-white w-7 h-7 rounded flex items-center justify-center text-xl opacity-85 hover:opacity-100 hover:shadow-md'
                     onClick={(e) => {
-                      // e.stopPropagation();
+                      e.stopPropagation();
                       deletePost(_id);
                     }}
                   >
@@ -110,7 +114,7 @@ const Post = ({post: {author, image, _id, destination, save}}) => {
         )}
       </div>
       {/* show author name/picture & link to author's profile underneath */}
-      <Link to={`user-profile/${userInfo?._id}`} className='flex gap-2 mt-2 items-center'>
+      <Link to={`user-profile/${author?._id}`} className='flex gap-2 mt-2 items-center'>
         <img className='w-8 h-8 rounded-full object-cover' src={author?.image} alt='user profile'/>
         <p className='font-semibold capitalize'>{author?.username}</p>
       </Link>

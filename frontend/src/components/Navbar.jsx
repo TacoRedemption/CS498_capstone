@@ -11,6 +11,7 @@ const Navbar = ({user, searchTerm, setSearchTerm}) => {
   return (
     <div className='flex gap-2 md:gap-5 w-full mt-5 pb-7'>
       <div className='flex justify-start items-center w-full px-2 rounded-md bg-white border-none outline-none focus-within:shadow-sm'>
+        {/* search bar */}
         <IoMdSearch fontSize={21} className='ml-1'/>
         <input 
           type='text' 
@@ -22,9 +23,11 @@ const Navbar = ({user, searchTerm, setSearchTerm}) => {
         />
       </div>
       <div className='flex gap-3'>
+        {/* show user profile next to search on large screens */}
         <Link to={`user-profile/${user?._id}`} className='hidden md:block'>
-          <img src={user.image} alt='user' className='w-14 h-12 rounded-lg'/>
+          <img src={user.image} alt='user' className='w-12 h-12 rounded-full object-cover'/>
         </Link>
+        {/* make post button */}
         <Link to='make-post' className='bg-cyan text-black rounded-lg w-12 h-12 md:w-14 md:h-12 flex justify-center items-center'>
           <IoMdAdd/>
         </Link>

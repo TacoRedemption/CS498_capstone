@@ -21,9 +21,9 @@ export default {
             title: 'Destination',
         },
         {
-            name: 'category',
+            name: 'artform',
             type: 'string',
-            title: 'Category',
+            title: 'Artform',
         },
         {
             name: 'image',
@@ -40,7 +40,7 @@ export default {
         },
         {
             name: 'author',
-            type: 'string',
+            type: 'author',
             title: 'Author',
         },
         {
