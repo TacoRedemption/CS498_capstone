@@ -33,10 +33,12 @@ const Home = () => {
 
   return (
     <div className="flex bg-gray-50 md:flex-row flex-col h-screen transaction-height duration-75 ease-out">
-        <div className="hidden md:flex h-screen flex-initial"> {/*hide on all devices except mobile*/}
+        {/* always show sidebar if not on small screen */}
+        <div className="hidden md:flex h-screen flex-initial">
           <Sidebar user={user && user}/>
         </div>
-        <div className="flex md:hidden flex-row"> {/*show on all devices except mobile*/}
+        {/* only show small shadowed sidebar on top if on small screen */}
+        <div className="flex md:hidden flex-row">
           <div className="p-2 w-full flex flex-row justify-between items-center shadow-md"> {/*Shadowed navbar at top - mobile*/}
             <HiMenu fontSize={40} className="cursor-pointer" onClick={() => setToggleSidebar(true)}/>
             <Link to="/">
@@ -46,8 +48,9 @@ const Home = () => {
               <img src={user?.image} alt="user profile" className="w-12 h-12 rounded-full object-cover"/>
             </Link>
           </div>
+          {/* show full sidebar if toggled in */}
           {toggleSidebar && (
-          <div className="fixed w-4/5 bg-white h-screen overflow-y-auto shadow-md z-10 animate-slide-in">
+          <div className="fixed w-2/5 bg-white h-screen overflow-y-auto shadow-md z-10 animate-slide-in">
             <div className="absolute w-full flex justify-end items-center p-2">
               <AiFillCloseCircle fontSize={30} className="cursor-pointer" onClick={() => setToggleSidebar(false)}/>
             </div>
