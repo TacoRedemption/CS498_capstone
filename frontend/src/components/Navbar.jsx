@@ -24,8 +24,8 @@ const Navbar = ({user, searchTerm, setSearchTerm}) => {
       </div>
       <div className='flex gap-3'>
         {/* show user profile next to search on large screens */}
-        <Link to={`user-profile/${user?._id}`} className='hidden md:block'>
-          <img src={user.image} alt='user' className='w-12 h-12 rounded-full object-cover'/>
+        <Link to={`profile/${user?._id}`} className='hidden md:block'>
+          <img src={user.image}  referrerPolicy="no-referrer" alt='user' className='w-12 h-12 rounded-full object-cover'/>
         </Link>
         {/* make post button */}
         <Link to='make-post' className='bg-cyan text-black rounded-lg w-12 h-12 md:w-14 md:h-12 flex justify-center items-center'>
