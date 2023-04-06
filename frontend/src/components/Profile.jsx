@@ -41,14 +41,7 @@ const Profile = () => {
 
     <div className="justify-left h-full">
 
-      {/* SIDEBAR */}
-      <div className="hidden md:flex h-screen flex-initial"> {/*hide on all devices except mobile*/}
-        <Sidebar user={user && user} />
-      </div>
-
       <div className='relative pb-2 h-full justify-center items-center'>
-        <Sidebar user={user && user} />
-
         <div className='flez flex-col pb-5'>
           <div className='relative flex flex-col mb-7'>
 
@@ -75,7 +68,11 @@ const Profile = () => {
               </h1>
 
               <div>
+
                 <button
+                type="button"
+                
+
                   onClick={async () => {
                     /*global google */
                     await google.accounts.id.initialize({
@@ -83,31 +80,17 @@ const Profile = () => {
 
                     });
                     await google.accounts.id.revoke(user.email);
-                    // navigate("/login")
+                    localStorage.clear();
                     window.location = window.location.origin + "/login" // window.location.origin is the scheme+thehost+port
+
                   }}
 
                 >
                   Logout
 
                 </button>
+
               </div>
-
-
-
-              <button
-                type="button"
-              >
-
-              </button>
-
-              {/* 
-<img 
-            referrerPolicy="no-referrer" 
-            className="w-full g-370 2xl:h-510 shadow-lg object-cover"
-            alt= "banner-pic"
-            /> */}
-
             </div>
 
           </div>
