@@ -87,7 +87,7 @@ const PostDetails = ({user}) => {
                     </a>
                 </div>
                 <a href={postDetails.destination} target='_blank' rel='noreferrer' className='bg-cyan rounded px-3 py-1.5 opacity-85 hover:opacity-100 hover:shadow-md'>
-                    {postDetails.destination.length > 50 ? `${postDetails.destination.slice(0,50)}...` : postDetails.destination}
+                    {postDetails.destination?.length > 50 ? `${postDetails.destination.slice(0,50)}...` : postDetails.destination}
                 </a>
             </div>
             {/* div for title & description */}
