@@ -56,8 +56,7 @@ export const searchQuery = (searchTerm) => {
             },
         },
     }`
-
-    return query
+    return query;
 }
 
 // query to get all posts for feed
@@ -84,4 +83,67 @@ export const feedQuery = `*[_type == 'post' && !(_id in path('drafts.**'))] | or
             email
         },
     },
-}`
+}`;
+
+export const postDetailsQuery = (postID) => {
+    const query = `*[_type == 'post' && !(_id in path('drafts.**')) && _id == '${postID}'] {
+        image {
+            asset -> {
+                url,
+            },
+        },
+        _id,
+        title,
+        description,
+        artform,
+        destination,
+        author -> {
+            _id,
+            username,
+            image,
+        },
+        save[] {
+            author -> {
+                _id,
+                username,
+                image,
+            },
+        },
+        comments[] {
+            comment,
+            _key,
+            author -> {
+                _id,
+                username,
+                image,
+            },
+        },
+    }`;
+    return query;
+}
+
+export const getSimilarPostsQuery = (post) => {
+    const query = `*[_type == 'post' && !(_id in path('drafts.**')) && artform == '${post.artform}' && _id != '${post._id}'] {
+        image {
+            asset -> {
+                url,
+            },
+        },
+        _id,
+        destination,
+        author -> {
+            _id,
+            username,
+            image,
+        },
+        save[] {
+            _key,
+            author -> {
+                _id,
+                username,
+                image,
+            },
+        },
+    }`;
+    return query;
+}
