@@ -52,7 +52,7 @@ const Post = ({post: {author, image, _id, destination, save}}) => {
       <div
         onMouseEnter={() => setPostHover(true)}
         onMouseLeave={() => setPostHover(false)}
-        onClick={() => navigate(`/pin-detail/${_id}`)}
+        onClick={() => navigate(`/post-details/${_id}`)}
         className='relative cursor-zoom-in w-auto hover:shadow-lg rounded-lg overflow-hidden transition-all duration-500 ease-in-out'>
 
         <img className='rounded-lg w-full' alt='user-post' src={urlFor(image).width(250).url()}/>
@@ -74,8 +74,8 @@ const Post = ({post: {author, image, _id, destination, save}}) => {
               {/* check if user has already saved this post */}
               {saved ? (
                 // show if saved & how many have saved
-                <button type='button' className='bg-cyan opacity-85 hover:opacity-100 text-white font-bold px-3 py-1 text-base rounded hover:shadow-md'>
-                  {save?.length}  Saved
+                <button type='button' className='bg-cyan opacity-85 hover:opacity-100 text-white hover:text-black font-bold px-3 py-1 text-base rounded hover:shadow-md'>
+                  ({save?.length}) Saved
                 </button>
               ) : (
                 // show save button if not saved
@@ -83,7 +83,7 @@ const Post = ({post: {author, image, _id, destination, save}}) => {
                   e.stopPropagation();
                   savePost(_id);
                 }}
-                  type='button' className='bg-cyan opacity-85 hover:opacity-100 text-white font-bold px-3 py-1 text-base rounded hover:shadow-md'>
+                  type='button' className='bg-cyan opacity-85 hover:opacity-100 text-white hover:text-black font-bold px-3 py-1 text-base rounded hover:shadow-md'>
                   {save?.length}  {toSavePost ? 'Saving...' : 'Save'}
                 </button>
               )}
@@ -94,7 +94,7 @@ const Post = ({post: {author, image, _id, destination, save}}) => {
                 {destination ? (
                   <a href={destination} target='_blank' rel='noreferrer' className='bg-white flex items-center gap-2 text-black font-bold p-1 pl-3 pr-4 rounded-full opacity-85 hover:opacity-100 hover:shadow-md'>
                     <BsFillArrowUpRightCircleFill/>
-                    {destination.slice(8, 18)}
+                    {destination.length > 18 ? `${destination.slice(0,18)}...` : destination}
                   </a>
                 ) : <div/>}  {/* empty div if no link to ensure trash can stays on right side */}
                 {/* show delete button for author to delete own posts */}
