@@ -42,7 +42,7 @@ const Profile = () => {
         setPosts(data);
       });
     } else {
-    //SEARCH FOR SAVED POSTS
+      //SEARCH FOR SAVED POSTS
       const savedPostsQuery = userSavedPostsQuery(userID);
 
       client.fetch(savedPostsQuery).then((data) => {
@@ -90,7 +90,7 @@ const Profile = () => {
 
               <div className="text-center mb-7">
 
-            {/* CREATE POST BUTTON */}
+                {/* CREATE POST BUTTON */}
                 <button
                   type="button"
                   onClick={(e) => {
@@ -132,6 +132,11 @@ const Profile = () => {
                 >
                   Logout
                 </button>
+              </div>
+
+              {/* PULLING POST ONTO PROFILE PICTURE */}
+              <div className="px-2">
+                  <WaterfallLayout posts={posts} />
               </div>
 
             </div>
