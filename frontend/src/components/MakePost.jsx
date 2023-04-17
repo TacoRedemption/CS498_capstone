@@ -79,8 +79,9 @@ const MakePost = ({user}) => {
 
   return (
     <div className='flex flex-col justify-center items-center mt-5 lg:h-4/5'>
-      <p className='justify-left text-3xl lg:w-4/5 w-full'>
-        Create Post</p>
+      <h2 className='justify-left text-3xl lg:w-4/5 w-full'>
+        Create Post
+      </h2>
       <div className=' flex lg:flex-row flex-col justify-center items-center bg-white lg:p-5 p-3 lg:w-4/5 w-full'>
         {/* make post div */}
         <div className='bg-secondaryColor p-3 flex flex-0.7 w-full'>
@@ -89,7 +90,7 @@ const MakePost = ({user}) => {
             {badImageType && <p>Wrong image type!</p>}
             {/* display image upload area */}
             {!image ? (
-              <label>
+              <label className='cursor-pointer'>
                 <div className='flex flex-col items-center justify-center h-full'>
                   <div className='flex flex-col justify-center items-center'>
                     {/* show upload icon */}
@@ -176,7 +177,7 @@ const MakePost = ({user}) => {
             )}
             {/* create post button */}
             <div className='flex justify-end items-end mt-5'>
-              <button type='button' onClick={makePost} className='bg-cyan text-white font-bold p-2 rounded w-28 hover:shadow-lg'>
+              <button type='button' onClick={makePost} className='bg-cyan text-white hover:text-black font-bold p-2 rounded w-28 hover:shadow-lg'>
                 Create Post
               </button>
             </div>

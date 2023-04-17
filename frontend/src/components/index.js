@@ -5,4 +5,5 @@ export {default as Navbar} from './Navbar';
 export {default as PostFeed} from './PostFeed';
 export {default as Post} from './Post';
 export {default as MakePost} from './MakePost';
+export {default as PostDetails} from './PostDetails';
 export {default as Search} from './Search';
