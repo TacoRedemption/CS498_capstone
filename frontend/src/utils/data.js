@@ -60,6 +60,56 @@ export const searchQuery = (searchTerm) => {
     return query
 }
 
+export const userCreatedPostsQuery = (userID) => {
+    const query = `*[ _type == 'pin' && userId == '${userID}'] | order(_createdAt desc){
+      image{
+        asset->{
+          url
+        }
+      },
+      _id,
+      destination,
+      author->{
+        _id,
+        username,
+        image
+      },
+      save[]{
+        author->{
+          _id,
+          username,
+          image
+        },
+      },
+    }`;
+    return query;
+  };
+  
+  export const userSavedPostsQuery = (userID) => {
+    const query = `*[_type == 'pin' && '${userID}' in save[].userId ] | order(_createdAt desc) {
+      image{
+        asset->{
+          url
+        }
+      },
+      _id,
+      destination,
+      author->{
+        _id,
+        username,
+        image
+      },
+      save[]{
+        postedBy->{
+          _id,
+          username,
+          image
+        },
+      },
+    }`;
+    return query;
+};
+
 // query to get all posts for feed
 export const feedQuery = `*[_type == 'post' && !(_id in path('drafts.**'))] | order(_createAt desc) {
     image {
