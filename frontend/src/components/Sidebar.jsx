@@ -6,6 +6,8 @@ import {IoIosArrowForward} from 'react-icons/io';
 import {artforms} from '../utils/data';
 import BlackLogo from '../visuals/BlackLogo.png';
 
+import { categories } from '../utils/data';
+
 // styles for current & non-current artform selections
 const activeStyle = "flex items-center px-5 gap-3 font-extrabold border-r-2 border-black transition-all duration-200 ease-in-out capitalize";
 const inactiveStyle = "flex items-center px-5 gap-3 text-gray-500 hover:text-black transition-all duration-200 ease-in-out capitalize";

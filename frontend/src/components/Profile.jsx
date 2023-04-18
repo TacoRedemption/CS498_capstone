@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { AiOutlineLogout } from 'react-icons/ai';
 import { useParams, useNavigate, useRoutes } from 'react-router-dom';
 import { userCreatedPostsQuery, userQuery, userSavedPostsQuery } from '../utils/data.js'
 import { client } from '../client.js'
@@ -134,10 +133,16 @@ const Profile = () => {
                 </button>
               </div>
 
-              {/* PULLING POST ONTO PROFILE PICTURE */}
+              {/* PULLING POST ONTO PROFILE PAGE */}
               <div className="px-2">
-                  <WaterfallLayout posts={posts} />
+              <WaterfallLayout posts={posts} />
               </div>
+
+              {posts?.length === 0 && (
+                <div className="flex justify-center font-bold items-center w-full text-1xl mt-2">
+                  No Posts Found!
+                </div>
+              )};
 
             </div>
           </div>
