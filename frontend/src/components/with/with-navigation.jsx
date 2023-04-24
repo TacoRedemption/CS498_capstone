@@ -1,13 +1,14 @@
-import React from'react' ;
+import React from 'react';
 import Sidebar from '../Sidebar';
 
 function WithNavigation(props) {
-    return <>
+    return <main className='flex'>
         <Sidebar></Sidebar>
-        
-        
-        {props.children}
-    </>;    
+
+        <section className='flex-grow'>
+            {props.children}
+        </section>
+    </main>;
 }
 
 export default WithNavigation;
