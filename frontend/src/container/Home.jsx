@@ -38,13 +38,13 @@ const Home = () => {
           <Sidebar user={user && user}/>
         </div>
         {/* only show small shadowed sidebar on top if on small screen */}
-        <div className="flex md:hidden flex-row">
+        <div className="flex md:hidden flex-row"> 
           <div className="p-2 w-full flex flex-row justify-between items-center shadow-md"> {/*Shadowed navbar at top - mobile*/}
-            <HiMenu fontSize={40} className="cursor-pointer" onClick={() => setToggleSidebar(true)}/>
+            <HiMenu fontSize={40} className="cursor-pointer" onClick={() => setToggleSidebar(true)}/> 
             <Link to="/">
               <img src={BlackLogo} alt="logo" className="h-12"/>
             </Link>
-            <Link to={`user-profile/${user?._id}`}>
+            <Link to={`profile/${user?._id}`}>
               <img src={user?.image} alt="user profile" className="w-12 h-12 rounded-full object-cover"/>
             </Link>
           </div>
@@ -59,7 +59,7 @@ const Home = () => {
         )}
         </div>
         <div className="pb-2 flex-1 h-screen overflow-y-scroll" ref={scrollRef}>
-          <Routes>
+          <Routes> 
             <Route path="/user/profile/:userID" element={<Profile/>}/>
             <Route path="/*" element={<Feed user={user && user}/>}/>
           </Routes>

@@ -27,8 +27,8 @@ const Profile = () => {
     client.fetch(query)
       .then((data) => {
         setUser(data[0]);
-      }, [userID])
-  })
+      })
+  }, [userID])
 
   // FETCHING THE SAVED POSTS AND CREATED POSTS
   useEffect(() => {
@@ -76,6 +76,7 @@ const Profile = () => {
               <img
                 className="rounded-full w-60 h-60 -mt-10 shadow-xl object-cover"
                 src={user.image}
+                referrerPolicy="no-referrer"
                 alt="user-pic"
               />
 
@@ -135,7 +136,7 @@ const Profile = () => {
 
               {/* PULLING POST ONTO PROFILE PAGE */}
               <div className="px-2">
-              <WaterfallLayout posts={posts} />
+                <WaterfallLayout posts={posts} />
               </div>
 
               {posts?.length === 0 && (

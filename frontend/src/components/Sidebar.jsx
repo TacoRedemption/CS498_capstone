@@ -28,11 +28,20 @@ const Sidebar = ({user, closeToggle}) => {
         </Link>
         {/* show links */}
         <div className="flex flex-col gap-5">
+
+           {/* if logged in show user DASHBOARD*/}
+        {user && (
+        <Link to={`/dashboard`} className="flex my-5 mb-3 gap-2 p-2 items-center bg-white rounded-lg shadow-lg mx-3" onClick={handleCloseSidebar}>
+          <p>Dashboard</p>
+          <IoIosArrowForward/>
+        </Link>
+      )} 
           {/* link to home */}
           <NavLink to="/" className={({isActive}) => isActive ? activeStyle : inactiveStyle} onClick={handleCloseSidebar}>
             <RiHomeFill/>
             Home
           </NavLink>
+          
           {/* show artform links section */}
           <h3 className="mt-2 px-5 text-base 2xl:text-xl">
             Discover by artform
@@ -48,7 +57,7 @@ const Sidebar = ({user, closeToggle}) => {
       </div>
       {/* if logged in show user profile at bottom */}
       {user && (
-        <Link to={`user-profile/${user._id}`} className="flex my-5 mb-3 gap-2 p-2 items-center bg-white rounded-lg shadow-lg mx-3" onClick={handleCloseSidebar}>
+        <Link to={`profile/${user._id}`} className="flex my-5 mb-3 gap-2 p-2 items-center bg-white rounded-lg shadow-lg mx-3" onClick={handleCloseSidebar}>
           <img src={user.image} className="w-10 h-10 rounded-full object-cover" alt="user profile"/>
           <p>{user.username}</p>
           <IoIosArrowForward/>

@@ -60,7 +60,7 @@ export const searchQuery = (searchTerm) => {
 }
 
 export const userCreatedPostsQuery = (userID) => {
-    const query = `*[ _type == 'pin' && userId == '${userID}'] | order(_createdAt desc){
+    const query = `*[ _type == 'post' && uid == '${userID}'] | order(_createdAt desc){
       image{
         asset->{
           url
@@ -85,7 +85,7 @@ export const userCreatedPostsQuery = (userID) => {
   };
   
   export const userSavedPostsQuery = (userID) => {
-    const query = `*[_type == 'pin' && '${userID}' in save[].userId ] | order(_createdAt desc) {
+    const query = `*[_type == 'post' && '${userID}' in save[].uid ] | order(_createdAt desc) {
       image{
         asset->{
           url
