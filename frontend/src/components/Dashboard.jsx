@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import WithNavigation from './with/with-navigation';
 import { client } from '../client';
+import { Chart, registerables } from 'chart.js';
 
 const Dashboard = () => {
-
-
     const [postsPerArtform, setPostsPerArtform] = useState({});
     const [artformsCount, setArtformsCount] = useState(0);
+    const canvas = useRef();
 
     useEffect(() => {
         client.fetch(`array::unique(*[_type == 'post'].artform)`)
@@ -25,8 +25,34 @@ const Dashboard = () => {
                 setPostsPerArtform(result.postsPerArtform);
                 setArtformsCount(result.artformsCount);
             });
+    }, []);
 
-    }, [])
+    useEffect(() => {
+        if (canvas.current) {
+            Chart.register(...registerables);
+            const labels = Object.keys(postsPerArtform);
+            const data = labels.map(label => postsPerArtform[label]);
+            const chart = new Chart(canvas.current, {
+                type: 'bar',
+                data: {
+                    labels, 
+                    datasets: [{
+                        label: 'Count Per Category',
+                        data,
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+            return () => chart.destroy();
+        }
+    }, [canvas, postsPerArtform]);
 
 
     return <WithNavigation>
@@ -49,7 +75,7 @@ const Dashboard = () => {
             </thead>
             <tbody>
                 {Object.entries(postsPerArtform).map((entry, index) => {
-                    return <tr className={0 == index % 2 ? '' : 'bg-gray-100'}>
+                    return <tr key={entry} className={0 == index % 2 ? '' : 'bg-gray-100'}>
                         <td className='pt-2 pb-2'>
                             {entry[0]}
                         </td>
@@ -60,6 +86,10 @@ const Dashboard = () => {
                 })}
             </tbody>
         </table>
+
+        <div>
+            <canvas ref={canvas}></canvas>
+        </div>
     </WithNavigation>;
 
 }
