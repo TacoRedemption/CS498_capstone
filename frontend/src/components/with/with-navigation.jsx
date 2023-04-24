@@ -5,7 +5,7 @@ function WithNavigation(props) {
     return <main className='flex'>
         <Sidebar></Sidebar>
 
-        <section className='flex-grow'>
+        <section className='flex-grow m-4'>
             {props.children}
         </section>
     </main>;

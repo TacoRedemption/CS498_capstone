@@ -29,44 +29,38 @@ const Dashboard = () => {
     }, [])
 
 
-    return <>
-        <WithNavigation>
-            <div>
-                <div>Categories: {artformsCount}</div>
-                <table >
-                    <thead>
-                        <tr>
-                            <th>
-                                Category
-                            </th>
-                            <th>
-                                Count
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {Object.entries(postsPerArtform).map(entry => {
-                            return <tr>
-                                <td>
-                                    {entry[0]}
-                                </td>
-                                <td>
-                                    {entry[1]}
-                                </td>
-                            </tr>
-                        })}
-                    </tbody>
-                </table>
-            </div>
-            <button 
-            type="button"
-            className=" bg-white p-2  rounded-full  shadow-md"
-            >
-                ADD NEW ARTFORM
-            </button>
-        </WithNavigation>
-
-    </>;
+    return <WithNavigation>
+        <div className='border p-2 rounded shadow-lg text-center'>
+            <p className='text-3xl font-bold uppercase text-gray-800'>
+                Categories
+            </p>
+            <p className='text-xl mt-2'>{artformsCount}</p>
+        </div>
+        <table className='table-auto text-left w-full my-12'>
+            <thead className='uppercase'>
+                <tr className='border-b border-b-4'>
+                    <th className='pt-2 pb-2'>
+                        Category
+                    </th>
+                    <th className='pt-2 pb-2'>
+                        Count
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                {Object.entries(postsPerArtform).map((entry, index) => {
+                    return <tr className={0 == index % 2 ? '' : 'bg-gray-100'}>
+                        <td className='pt-2 pb-2'>
+                            {entry[0]}
+                        </td>
+                        <td className='pt-2 pb-2'>
+                            {entry[1]}
+                        </td>
+                    </tr>
+                })}
+            </tbody>
+        </table>
+    </WithNavigation>;
 
 }
 
