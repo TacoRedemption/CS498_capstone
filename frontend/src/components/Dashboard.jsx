@@ -58,7 +58,7 @@ const Dashboard = () => {
     return <WithNavigation>
         <div className='border p-2 rounded shadow-lg text-center'>
             <p className='text-3xl font-bold uppercase text-gray-800'>
-                Categories
+                Artforms
             </p>
             <p className='text-xl mt-2'>{artformsCount}</p>
         </div>
@@ -66,7 +66,7 @@ const Dashboard = () => {
             <thead className='uppercase'>
                 <tr className='border-b border-b-4'>
                     <th className='pt-2 pb-2'>
-                        Category
+                        Artform
                     </th>
                     <th className='pt-2 pb-2'>
                         Count
