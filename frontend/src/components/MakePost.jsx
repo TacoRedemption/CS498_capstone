@@ -152,7 +152,7 @@ const MakePost = ({ user }) => {
               {/* artform selection dropdown */}
               <input className='w-4/5 text-base border-b-2 border-gray-200 p-2 rounded-md cursor-pointer'
                      type='text'
-                     placeholder='select artform or input yours'
+                     placeholder='Select artform or input your own'
                      list='datalist-artforms'
                      onInput={(e) => setArtform(e.target.value)} />
               <datalist id='datalist-artforms'>
