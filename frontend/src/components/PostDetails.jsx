@@ -99,7 +99,7 @@ const PostDetails = ({user}) => {
                     {postDetails.description}
                 </p>
             </div>
-            <Link to={`profile/${postDetails.author?._id}`} className='flex gap-2 mt-5 items-center bg-white rounded-lg'>
+            <Link to={`../profile/${postDetails.author?._id}`} className='flex gap-2 mt-5 items-center bg-white rounded-lg'>
                 <img className='w-8 h-8 rounded-full object-cover' src={postDetails.author?.image} alt='user profile'/>
                 <p className='font-semibold capitalize'>{postDetails.author?.username}</p>
             </Link>
@@ -124,8 +124,8 @@ const PostDetails = ({user}) => {
             </div>
             {/* create comment div */}
             <div className='flex flex-wrap mt-6 gap-3'>
-                <Link to={`profile/${postDetails.author?._id}`}>
-                    <img className='w-8 h-8 rounded-full object-cover' src={postDetails.author?.image} alt='user profile'/>
+                <Link to={`../profile/${user?._id}`}>
+                    <img className='w-8 h-8 rounded-full object-cover' src={user?.image} alt='user profile'/>
                 </Link>
                 {/* comment entry box */}
                 <input type='text' placeholder='Add a comment' value={comment} 
