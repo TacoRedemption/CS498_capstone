@@ -59,8 +59,9 @@ export const searchQuery = (searchTerm) => {
     return query;
 }
 
+// get posts created by given user
 export const userCreatedPostsQuery = (userID) => {
-    const query = `*[ _type == 'post' && uid == '${userID}'] | order(_createdAt desc){
+    const query = `*[ _type == 'post' && !(_id in path('drafts.**'))  && uid == '${userID}'] | order(_createdAt desc){
       image{
         asset->{
           url
@@ -84,8 +85,9 @@ export const userCreatedPostsQuery = (userID) => {
     return query;
   };
   
+  // get user's saved posts
   export const userSavedPostsQuery = (userID) => {
-    const query = `*[_type == 'post' && '${userID}' in save[].uid ] | order(_createdAt desc) {
+    const query = `*[_type == 'post' && !(_id in path('drafts.**'))  && '${userID}' in save[].uid ] | order(_createdAt desc) {
       image{
         asset->{
           url
@@ -135,6 +137,7 @@ export const feedQuery = `*[_type == 'post' && !(_id in path('drafts.**'))] | or
     },
 }`;
 
+// get all the details of a given post
 export const postDetailsQuery = (postID) => {
     const query = `*[_type == 'post' && !(_id in path('drafts.**')) && _id == '${postID}'] {
         image {
@@ -172,6 +175,7 @@ export const postDetailsQuery = (postID) => {
     return query;
 }
 
+// return similar posts to a given post
 export const getSimilarPostsQuery = (post) => {
     const query = `*[_type == 'post' && !(_id in path('drafts.**')) && artform == '${post.artform}' && _id != '${post._id}'] {
         image {
