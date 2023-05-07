@@ -145,7 +145,7 @@ const Profile = () => {
                   <div className="flex justify-center font-bold items-center w-full text-1xl mt-2">
                     No Posts Found!
                   </div>
-                )};
+                )}
 
               </div>
             </div>

@@ -61,7 +61,7 @@ export const searchQuery = (searchTerm) => {
 
 // get posts created by given user
 export const userCreatedPostsQuery = (userID) => {
-    const query = `*[ _type == 'post' && !(_id in path('drafts.**'))  && uid == '${userID}'] | order(_createdAt desc){
+    const query = `*[_type == 'post' && !(_id in path('drafts.**')) && uid == '${userID}'] | order(_createdAt desc){
       image{
         asset->{
           url
